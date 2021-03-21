@@ -10,7 +10,9 @@ __all__ = [
     "search",
     "latest",
     "random",
-    "count"
+    "count",
+    "SongNotFoundError",
+    "PageNotFoundError"
 ]
 
 __version__ = "0.023"
