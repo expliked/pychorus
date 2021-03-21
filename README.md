@@ -10,10 +10,10 @@ Install them both by running these commands<br>
 # Functions
 | Function | Arguments | What it does |
 | :---:    | :---:     | :---:        |
-| ` pychorus.search()` -> `list` | `generic` (optional),<br> `name` (optional keyword),<br> `artist` (optional keyword),<br> `album `(optional keyword),<br> `genre` (optional keyword),<br> `year` (optional keyword),<br> `charter` (optional keyword),<br> `year` (optional keyword) | Returns the top 10 charts that best match your query. |
-| `pychorus.latest()` -> `list` | None | Returns 20 of the latest charts added to Chorus |
-| `pychorus.random()` -> `list` | None | Returns 20 random charts from Chorus |
-| `pychorus.count()` -> `list` | None | Returns the number of songs hosted on Chorus |
+| ` pychorus.search()` -> `list[pychorus.Song]` | `generic` (optional),<br> `name` (optional keyword),<br> `artist` (optional keyword),<br> `album `(optional keyword),<br> `genre` (optional keyword),<br> `year` (optional keyword),<br> `charter` (optional keyword),<br> `year` (optional keyword) | Returns the top 10 charts that best match your query. |
+| `pychorus.latest()` -> `list[pychorus.Song]` | None | Returns 20 of the latest charts added to Chorus |
+| `pychorus.random()` -> `list[pychorus.Song]` | None | Returns 20 random charts from Chorus |
+| `pychorus.count()` -> `int` | None | Returns the number of songs hosted on Chorus |
 
 # Objects
 `pychorus.Song`
