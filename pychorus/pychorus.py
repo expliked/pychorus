@@ -3,6 +3,7 @@ import json
 import gdown
 import os
 import shutil
+import pprint
 
 class Song(object):
     """
@@ -17,11 +18,15 @@ class Song(object):
     
     def __init__(self, my_dict): 
         for key in my_dict: 
-            setattr(self, key, my_dict[key]) 
-
-    def __repr__(self):
+            setattr(self, key, my_dict[key])
+            
+    def info(self):
+        """
+        Returns basic info about the song such as name and artist.
+        """
+        
         return f'''
-"song": {{
+"Song": {{
     "id": {self.id},
     "name": "{self.name}",
     "artist": "{self.artist}",
@@ -32,13 +37,20 @@ class Song(object):
     "link": "{self.link}"
 }}'''
 
+    def all_info(self):
+        """
+        Returns ALL info about the song.
+        """
+        
+        return pprint.pformat(self.__dict__, indent = 4)
+    
     def download(self, name = None):
         """
         Downloads the song (as a zip, rar, 7z, etc.) to the current directory.
 
         Parameters:
             (optional) name:
-                sets the name of the zip archive that will be downloaded.
+                sets the name of the archive file that will be downloaded.
         """
         
         if (len(self.directLinks) == 1 and "archive" in self.directLinks):
@@ -87,12 +99,17 @@ def search(generic = "", **kwargs):
         
     Or, you can just provide a generic string and it will search from that.
     If the generic string exists in the arguments, the function will ignore all keyworded arguments.
-    
+
+    Using the page argument, you can get the next page of 10 songs.
+
     Returns the top 10 results from the search as pychorus.Song objects.
     """
     
     url = r'https://chorus.fightthe.pw/api/search?query='
     songs = []
+
+    offset = kwargs["page"] if "page" in kwargs else None
+    del kwargs["page"]
     
     if (generic):
         url += generic
@@ -101,6 +118,9 @@ def search(generic = "", **kwargs):
         for kw in kwargs:
             url += kw + "=" + '"' + kwargs[kw] + '" ' # adding the keyword and keyword value to the URL
 
+        if (offset != None):
+            url += f"&from={offset * 10}"
+            
     else:
         raise Exception("pychorus.search() expects atleast one argument")
 
@@ -109,6 +129,9 @@ def search(generic = "", **kwargs):
     for song in request.json()["songs"]:
         songs.append(Song(song))
 
+    if (len(songs) == 0):
+        raise Exception(f"Page {offset} does not exist for the given query.")
+    
     return songs
 
 def latest():
