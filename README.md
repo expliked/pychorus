@@ -7,6 +7,8 @@ Install them both by running these commands<br>
 `pip install gdown`<br>
 `pip install requests`<br>
 
+# Documentation
+You can view the docs for this module [here](https://github.com/expliked/pychorus/blob/main/docs.md)
 # Known limitations
 - Occasionally, Chorus will have a song/setlist that links to a YouTube link, and currently this library won't be able to download those.
 
