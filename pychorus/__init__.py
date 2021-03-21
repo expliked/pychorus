@@ -13,5 +13,5 @@ __all__ = [
     "count"
 ]
 
-__version__ = "0.02"
+__version__ = "0.023"
 __author__ = "expliked"
