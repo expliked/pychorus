@@ -5,6 +5,9 @@ import os
 import shutil
 import pprint
 
+class PageNotFoundError(Exception):
+    pass
+
 class Song(object):
     """
     A song object
@@ -130,7 +133,7 @@ def search(generic = "", **kwargs):
         songs.append(Song(song))
 
     if (len(songs) == 0):
-        raise Exception(f"Page {offset} does not exist for the given query.")
+        raise PageNotFoundError(f"Page {offset} does not exist for the given query.")
     
     return songs
 
