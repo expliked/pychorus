@@ -8,6 +8,9 @@ import pprint
 class PageNotFoundError(Exception):
     pass
 
+class SongNotFoundError(Exception):
+    pass
+
 class Song(object):
     """
     A song object
@@ -136,6 +139,9 @@ def search(generic = "", **kwargs):
         songs.append(Song(song))
 
     if (len(songs) == 0):
+        if (offset == None):
+            raise SongNotFoundError(f'No charts for the song "{kwargs["name"]}" exist.')
+        
         raise PageNotFoundError(f"Page {offset} does not exist for the given query.")
     
     return songs
