@@ -111,8 +111,11 @@ def search(generic = "", **kwargs):
     url = r'https://chorus.fightthe.pw/api/search?query='
     songs = []
 
-    offset = kwargs["page"] if "page" in kwargs else None
-    del kwargs["page"]
+    offset = None
+    
+    if "page" in kwargs:
+        offset = kwargs["page"]
+        del kwargs["page"]
     
     if (generic):
         url += generic
